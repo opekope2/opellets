@@ -1,16 +1,23 @@
-# Maintainer: Doug Patti <douglas.patti@gmail.com>
+# Maintainer: opekope2 <opekope2@gmail.com>
 
-pkgname=pellets
-pkgver=1.0.1
+_gitname=opellets
+pkgname=$_gitname-git
+pkgver=1
 pkgrel=1
-pkgdesc="manage installed Arch packages with a configuration file"
+pkgdesc="Manage installed Arch packages with a configuration file"
 arch=('any')
-url="https://github.com/dpatti/pellets"
+url="https://github.com/opekope2/$_gitname"
 license=('Unlicense')
-depends=('bash')
-source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/$pkgver.tar.gz")
-md5sums=('268bdaaef8a1be7521ed5acd96025393')
+depends=('bash' 'sudo')
+source=("git+https://github.com/opekope2/$_gitname")
+sha256sums=('SKIP')
+
+pkgver() {
+	cd "$srcdir/$_gitname"
+	echo "r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
 
 package() {
-	install -Dm775 "$srcdir/$pkgname-$pkgver/pellets" "$pkgdir/usr/bin/pellets"
+	cd "$srcdir/$_gitname"
+	install -Dm775 "opellets" "$pkgdir/usr/bin/opellets"
 }
