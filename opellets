@@ -4,11 +4,11 @@
 set -euo pipefail
 
 if [ -n "${XDG_CONFIG_HOME:-}" ]; then
-  default_config_root=$XDG_CONFIG_HOME/pellets
+  default_config_root=$XDG_CONFIG_HOME/opellets
 else
   user="${SUDO_USER:-$USER}"
   user_home=$(eval "echo ~$user")
-  default_config_root=$user_home/.config/pellets
+  default_config_root=$user_home/.config/opellets
 fi
 
 default_config_file=$default_config_root/packages
@@ -31,9 +31,9 @@ while [ $# -gt 0 ]; do
     -h|--help)
       usage
       echo
-      echo "<config> defaults to ~/.config/pellets/packages"
+      echo "<config> defaults to ~/.config/opellets/packages"
       echo "<command> must accept multiple packages as arguments"
-      echo "    if --aur-install is not specified and ~/.config/pellets/aur-install exists"
+      echo "    if --aur-install is not specified and ~/.config/opellets/aur-install exists"
       echo "    and is executable, that will be used instead"
       exit 0
       ;;
