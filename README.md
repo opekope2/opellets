@@ -1,20 +1,20 @@
-# pellets
+# OPellets
 
-```
-pellets [<config>] [--aur-install <command>]
+```bash
+opellets [<config>] [--aur-install <command>]
 ```
 
-A declarative `pacman` wrapper for Arch Linux. The goal of pellets is to allow
+A declarative `pacman` wrapper for Arch Linux. The goal of opellets is to allow
 you to tersely specify what packages you expect to be installed and keep your
 system tidy by removing packages that aren't needed. It's also great for
-bootstrapping a new system. Pellets doesn't prevent you from installing new
+bootstrapping a new system. OPellets doesn't prevent you from installing new
 packages manually to try them out, but it will help you remember to keep a
 transcript of those you want to stay around.
 
 You start by specifying an annotated file of packages you want installed, like
 this:
 
-```
+```bash
 # Apps
 google-chrome [aur]
 vlc
@@ -27,12 +27,12 @@ xorg [group]
 xmonad
 ```
 
-Then, when you run `pellets`, it will look at the current explicitly-installed
+Then, when you run `opellets`, it will look at the current explicitly-installed
 packages, compare them to the list, and install, remove, or modify to make your
 system match the config file.
 
-```
-$ pellets
+```bash
+$ opellets
 install maim
 remove scrot
 mark-explicit xorg-xrandr
@@ -58,11 +58,12 @@ dependency packages after the previous step is complete.
 ## Config File
 
 You can specify a path to a config file on the command line. If none is
-specified, `pellets` will look in the default location using [XDG Base Directory
-specification][xdg] which is typically `~/.config/pellets/packages`. Note that
-even when run with `sudo`, `~` will resolve to the calling user's `$HOME`
-directory. If you are using `$XDG_CONFIG_HOME`, you must use `sudo -E` to
-preserve the environment.
+specified, `opellets` will look in the default location using [XDG Base Directory
+specification][xdg] which is typically `~/.config/opellets/packages`. Note that
+when run with `sudo`, `~` will resolve to the calling user's `$HOME` directory.
+If you are using `$XDG_CONFIG_HOME`, you must use `sudo -E` to preserve the
+environment. Or just run `opellets` without `sudo` as it will call pacman with
+`sudo`.
 
 [xdg]: https://wiki.archlinux.org/title/XDG_Base_Directory
 
@@ -80,7 +81,7 @@ against the `python-pynvim` package which *provides* "python-neovim".
 
 Provision and group resolution happens on each run. This means that if a group
 was installed and a package was later added to the group, that new package will
-be installed on the next run of pellets. This is *inconsistent* with how pacman
+be installed on the next run of `opellets`. This is *inconsistent* with how pacman
 works -- pacman only remembers the actual packages that were installed, not by
 what method they were installed.
 
@@ -93,7 +94,7 @@ keep it.
 If you're starting from a blank slate, you can query what is currently installed
 on your system:
 
-```
+```bash
 $ pacman -Q --quiet --explicit --native && pacman -Q --quiet --explicit --foreign | xargs printf "%s [aur]\n"
 ```
 
@@ -113,7 +114,7 @@ opellets --aur-install "paru -S"
 ```
 
 Alternatively, you can place an executable file at the path
-`$XDG_CONFIG_HOME/pellets/aur-install` (where `$XDG_CONFIG_HOME` defaults to
+`$XDG_CONFIG_HOME/opellets/aur-install` (where `$XDG_CONFIG_HOME` defaults to
 `~/.config`). If `--aur-install` is not specified and the file is present, it
 will be used. For example:
 
