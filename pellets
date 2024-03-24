@@ -202,9 +202,9 @@ function prompt {
 
 function pacman! {
   if [ "$dry" == 1 ]; then
-    echo pacman "$@"
+    echo sudo pacman "$@"
   else
-    command pacman "$@"
+    command sudo pacman "$@"
   fi
 }
 
