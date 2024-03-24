@@ -126,7 +126,6 @@ exec paru -S "$@"
 ## Installation
 
 ```bash
-git clone https://github.com/opekope2/opellets.git
-cd opellets
+curl -O https://raw.githubusercontent.com/opekope2/opellets/main/PKGBUILD
 makepkg -si
 ```
