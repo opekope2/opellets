@@ -108,8 +108,8 @@ entire toolchain for building AUR packages. Instead, you can optionally pass a
 command prefix with `--aur-install` that accepts packages on the command line.
 For example:
 
-```
-pellets --aur-install "aura -A"
+```bash
+opellets --aur-install "paru -S"
 ```
 
 Alternatively, you can place an executable file at the path
@@ -117,10 +117,9 @@ Alternatively, you can place an executable file at the path
 `~/.config`). If `--aur-install` is not specified and the file is present, it
 will be used. For example:
 
-```
+```bash
 #!/usr/bin/env bash
-
-exec aura -A --unsuppress --noconfirm "$@"
+exec paru -S "$@"
 ```
 
 ## Installation
